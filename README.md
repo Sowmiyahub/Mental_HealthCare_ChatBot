@@ -27,14 +27,14 @@ Ensure you have the following installed:
 ### Installation
 
 1. **Clone the repository:**
-   git clone https://github.com/Sowmiyahub/Mental_HealthCare_ChatBot.git
-   cd Mental_HealthCare_ChatBot/Python-Mental-Health-Chatbot-main
+   - git clone https://github.com/Sowmiyahub/Mental_HealthCare_ChatBot.git
+   - cd Mental_HealthCare_ChatBot/Python-Mental-Health-Chatbot-main
 2. **Install dependencies:**
-   pip install -r requirements.txt
-   Note: If requirements.txt is not present, install the necessary libraries manually:
-   pip install tensorflow nltk
+   - pip install -r requirements.txt
+   - Note: If requirements.txt is not present, install the necessary libraries manually:
+     pip install tensorflow nltk
 3. **Run the chatbot:**
-    python chatbot.py
+    - python chatbot.py
 ## Features
 Intent Recognition: Classifies user inputs into predefined intents.
 Contextual Responses: Provides responses based on the identified intent.
