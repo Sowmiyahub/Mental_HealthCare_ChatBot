@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Breathing Flower</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/flower.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Mindful Breathing Flower</h1>
+        
+        <div class="flower-container" id="flowerContainer">
+            <div class="flower-center"></div>
+            <!-- Petals will be added by JavaScript -->
+        </div>
+        
+        <h2 class="breathe-title">Breathe In...</h2>
+        
+        <div class="instructions">
+            <p>Inhale as the flower opens (4 seconds)</p>
+            <p>Exhale as the flower closes (4 seconds)</p>
+            <p>Repeat to relax and focus</p>
+            <p class="benefits"><strong>Benefits:</strong> Reduces stress, improves focus, and promotes relaxation</p>
+        </div>
+        
+        <div class="controls">
+            <button id="startBtn">Restart</button>
+            <button id="stopBtn">Pause</button>
+            <button id="muteBtn">Sound On</button>
+        </div>
+        
+        <div class="audio-warning">
+            Note: For audio guidance, please click "Start" and allow audio if prompted
+        </div>
+    </div>
+
+    <div class="particles" id="particles"></div>
+    
+    <!-- Audio elements -->
+    <audio id="inhaleSound" src="{{ url_for('static', filename='sounds/inhale.mp3') }}"></audio>
+    <audio id="exhaleSound" src="{{ url_for('static', filename='sounds/exhale.mp3') }}"></audio>
+    <audio id="backgroundSound" loop src="{{ url_for('static', filename='sounds/nature.mp3') }}"></audio>
+    
+    <script src="{{ url_for('static', filename='js/flower.js') }}"></script>
+</body>
+</html>

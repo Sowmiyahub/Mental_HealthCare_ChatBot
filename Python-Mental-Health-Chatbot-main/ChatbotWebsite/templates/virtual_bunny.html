@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Virtual Bunny</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .pet-container {
+            text-align: center;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #8a4fff;
+            margin-bottom: 20px;
+        }
+
+        .bunny-container {
+            position: relative;
+            height: 200px;
+            margin: 20px 0;
+        }
+
+        .bunny {
+            position: absolute;
+            width: 120px;
+            height: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+        }
+
+        .ears {
+            position: absolute;
+            top: -44px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 2;
+        }
+
+        .ear {
+            width: 30px;
+            height: 60px;
+            background: #f5d0fe;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .ear::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 40px;
+            background: #f0abfc;
+            border-radius: 10px;
+            top: 10px;
+            left: 5px;
+        }
+
+        .head {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #f5d0fe;
+            border-radius: 50%;
+            top: 10px;
+            left: 20px;
+            z-index: 3;
+        }
+
+        .eyes {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 25px;
+        }
+
+        .eye {
+            width: 12px;
+            height: 15px;
+            background: #333;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .eye::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+        }
+
+        .nose {
+            position: absolute;
+            width: 10px;
+            height: 8px;
+            background: #ff85a2;
+            border-radius: 50%;
+            top: 46px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+        }
+
+        .whiskers {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 20px;
+            z-index: 3;
+        }
+
+        .whisker {
+            position: absolute;
+            width: 20px;
+            height: 1px;
+            background: #333;
+            top: 0;
+        }
+
+        .whisker.left-top {
+            left: 2px;
+            transform: rotate(9deg);
+            transform-origin: left bottom;
+        }
+
+        .whisker.left-bottom {
+            left: 5px;
+            transform: rotate(-20deg);
+            transform-origin: left bottom;
+            top: 15px;
+        }
+
+        .whisker.right-top {
+            right: 2px;
+            transform: rotate(-9deg);
+            transform-origin: right bottom;
+        }
+
+        .whisker.right-bottom {
+            right: 5px;
+            transform: rotate(20deg);
+            transform-origin: right bottom;
+            top: 15px;
+        }
+
+        .mouth {
+            position: absolute;
+            width: 12px;
+            height: 6px;
+            background: #ff85a2;
+            border-radius: 0 0 8px 8px;
+            top: 54px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .body {
+            position: absolute;
+            width: 90px;
+            height: 100px;
+            background: #f5d0fe;
+            border-radius: 50%;
+            top: 70px;
+            left: 15px;
+            z-index: 2;
+        }
+
+        .arms {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 40px;
+            z-index: 1;
+        }
+
+        .arm {
+            position: absolute;
+            width: 30px;
+            height: 50px;
+            background: #f5d0fe;
+            border-radius: 15px;
+        }
+
+        .arm.left {
+            left: 5px;
+            transform: rotate(30deg);
+        }
+
+        .arm.right {
+            right: 5px;
+            transform: rotate(-30deg);
+        }
+
+        .legs {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 40px;
+            z-index: 1;
+        }
+
+        .leg {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background: #f5d0fe;
+            border-radius: 15px;
+        }
+
+        .leg.left { left: 5px; }
+        .leg.right { right: 5px; }
+
+        .tail {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: #f5d0fe;
+            border-radius: 50%;
+            bottom: 10px;
+            right: 15px;
+            z-index: 3;
+        }
+
+        .stats {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .stat {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .stat span {
+            width: 80px;
+            display: inline-block;
+            font-weight: bold;
+            color: #666;
+        }
+
+        progress {
+            width: 180px;
+            height: 15px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        progress::-webkit-progress-bar {
+            background: #f3e8ff;
+            border-radius: 10px;
+        }
+
+        progress::-webkit-progress-value {
+            border-radius: 10px;
+        }
+
+        #hunger::-webkit-progress-value { background: #f59e0b; }
+        #happiness::-webkit-progress-value { background: #a855f7; }
+        #energy::-webkit-progress-value { background: #10b981; }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 25px;
+            background: #e9d5ff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        button:hover {
+            background: #d8b4fe;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 8px rgba(0,0,0,0.15);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .message {
+            min-height: 24px;
+            color: #8a4fff;
+            font-weight: bold;
+            margin: 15px 0;
+            transition: all 0.3s;
+            opacity: 0;
+        }
+
+        @keyframes hop {
+            0%, 100% { transform: translateY(0) translateX(-50%); }
+            30% { transform: translateY(-30px) translateX(-50%); }
+            50% { transform: translateY(0) translateX(-50%); }
+            70% { transform: translateY(-15px) translateX(-50%); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: translateX(-50%) rotate(0); }
+            25% { transform: translateX(-50%) rotate(5deg); }
+            75% { transform: translateX(-50%) rotate(-5deg); }
+        }
+
+        @keyframes chew {
+            0%, 100% { transform: translateX(-50%) scaleY(1); }
+            50% { transform: translateX(-50%) scaleY(0.9); }
+        }
+
+        @keyframes happy {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+        }
+
+        @keyframes blink {
+            0%, 96%, 100% { height: 15px; }
+            98% { height: 2px; }
+        }
+
+        .happy-anim { animation: hop 0.8s ease; }
+        .petting-anim { animation: wiggle 0.5s ease 2; }
+        .eating-anim { animation: chew 0.3s ease 4; }
+        .happy-face { animation: happy 0.5s ease; }
+        .blinking .eye { animation: blink 3s infinite; }
+
+        .grass {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: #84cc16;
+            z-index: 0;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .grass::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: radial-gradient(ellipse at top, #84cc16 0%, transparent 70%);
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff85a2;
+            opacity: 0;
+            z-index: 10;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+
+        .carrot {
+            position: absolute;
+            width: 30px;
+            height: 50px;
+            z-index: 4;
+            left: 40px;
+            top: 70px;
+            display: none;
+            transform: rotate(180deg);
+        }
+        
+        .carrot-body {
+            position: absolute;
+            width: 20px;
+            height: 40px;
+            background: #f97316;
+            border-radius: 10px 10px 0 0;
+            clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+            bottom: 0;
+            left: 5px;
+        }
+        
+        .carrot-top {
+            position: absolute;
+            width: 5px;
+            height: 20px;
+            background: #84cc16;
+            top: -10px;
+            left: 12px;
+            transform: rotate(5deg);
+        }
+        
+        .carrot-top::before,
+        .carrot-top::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 15px;
+            background: #84cc16;
+            top: 0;
+            left: 0;
+        }
+        
+        .carrot-top::before {
+            transform: rotate(30deg) translateX(-5px);
+        }
+        
+        .carrot-top::after {
+            transform: rotate(-20deg) translateX(5px);
+        }
+        
+        .sleeping .eyes {
+            display: none;
+        }
+        
+        .sleeping .closed-eyes {
+            display: block;
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 15px;
+        }
+        
+        .closed-eyes {
+            display: none;
+        }
+        
+        .sleeping .eye-lid {
+            position: absolute;
+            width: 12px;
+            height: 2px;
+            background: #333;
+            top: 0;
+        }
+        
+        .sleeping .eye-lid.left {
+            left: 0;
+        }
+        
+        .sleeping .eye-lid.right {
+            right: 0;
+        }
+        
+        .sleeping .zzz {
+            position: absolute;
+            font-size: 12px;
+            color: #8a4fff;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float-up 2s infinite;
+        }
+        
+        .hugging .arms {
+            transform: translateX(-50%) translateY(-20px);
+            transition: all 0.3s;
+        }
+        
+        .hugging .arm.left {
+            transform: rotate(0deg) translateX(10px);
+        }
+        
+        .hugging .arm.right {
+            transform: rotate(0deg) translateX(-10px);
+        }
+    </style>
+</head>
+<body>
+    <div class="pet-container">
+        <h1>Virtual Bunny</h1>
+        
+        <div class="bunny-container">
+            <div class="bunny blinking">
+                <div class="carrot">
+                    <div class="carrot-body"></div>
+                    <div class="carrot-top"></div>
+                </div>
+                <div class="ears">
+                    <div class="ear left-ear"></div>
+                    <div class="ear right-ear"></div>
+                </div>
+                <div class="head">
+                    <div class="eyes">
+                        <div class="eye left-eye"></div>
+                        <div class="eye right-eye"></div>
+                    </div>
+                    <div class="closed-eyes">
+                        <div class="eye-lid left"></div>
+                        <div class="eye-lid right"></div>
+                        <div class="zzz">Zzz</div>
+                    </div>
+                    <div class="nose"></div>
+                    <div class="whiskers">
+                        <div class="whisker left-top"></div>
+                        <div class="whisker left-bottom"></div>
+                        <div class="whisker right-top"></div>
+                        <div class="whisker right-bottom"></div>
+                    </div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body"></div>
+                <div class="arms">
+                    <div class="arm left"></div>
+                    <div class="arm right"></div>
+                </div>
+                <div class="legs">
+                    <div class="leg left"></div>
+                    <div class="leg right"></div>
+                </div>
+                <div class="tail"></div>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <span>Hunger: </span>
+                <progress id="hunger" value="50" max="100"></progress>
+            </div>
+            <div class="stat">
+                <span>Happiness: </span>
+                <progress id="happiness" value="70" max="100"></progress>
+            </div>
+            <div class="stat">
+                <span>Energy: </span>
+                <progress id="energy" value="80" max="100"></progress>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button id="feed">🥕 Feed</button>
+            <button id="hug">🤗 Hug</button>
+            <button id="sleep">😴 Sleep</button>
+            <button id="cheer">💖 Cheer Up</button>
+        </div>
+        
+        <div class="message" id="message"></div>
+        
+        <div class="grass"></div>
+    </div>
+    
+    <script>
+        const bunny = document.querySelector('.bunny');
+        const messageEl = document.getElementById('message');
+        const hungerBar = document.getElementById('hunger');
+        const happinessBar = document.getElementById('happiness');
+        const energyBar = document.getElementById('energy');
+        const carrot = document.querySelector('.carrot');
+        
+        let stats = {
+            hunger: 50,
+            happiness: 70,
+            energy: 80
+        };
+        
+        let currentMood = 'neutral';
+        let isSleeping = false;
+        
+        // Uplifting messages for the Cheer Up button
+        const cheerMessages = [
+            "You're amazing just the way you are!",
+            "This world is better with you in it!",
+            "You've got this! I believe in you!",
+            "Your smile can brighten anyone's day!",
+            "You're stronger than you think!",
+            "Every day is a fresh start!",
+            "You make a difference in this world!",
+            "Your potential is limitless!",
+            "You're worthy of love and happiness!",
+            "Tough times don't last, tough people do!",
+            "You're capable of amazing things!",
+            "Your kindness makes the world better!",
+            "You're not alone - I'm here for you!",
+            "Tomorrow is a new opportunity!",
+            "You're braver than you believe!"
+        ];
+        
+        function updateStats() {
+            hungerBar.value = stats.hunger;
+            happinessBar.value = stats.happiness;
+            energyBar.value = stats.energy;
+            
+            if (stats.hunger < 20) {
+                currentMood = 'hungry';
+            } else if (stats.energy < 20) {
+                currentMood = 'tired';
+            } else if (stats.happiness > 80) {
+                currentMood = 'happy';
+            } else {
+                currentMood = 'neutral';
+            }
+        }
+        
+        function showMessage(text, duration = 2000) {
+            messageEl.textContent = text;
+            messageEl.style.opacity = 1;
+            setTimeout(() => {
+                messageEl.style.opacity = 0;
+            }, duration);
+        }
+        
+        function createHearts(count) {
+            for (let i = 0; i < count; i++) { 
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤';
+                heart.style.left = `${Math.random() * 250 + 35}px`;
+                heart.style.top = `${Math.random() * 100 + 100}px`;
+                document.querySelector('.pet-container').appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.style.animation = 'float-up 1.5s ease-out';
+                    setTimeout(() => heart.remove(), 1500);
+                }, i * 200);
+            }
+        }
+        
+        document.getElementById('feed').addEventListener('click', () => {
+            if (isSleeping) {
+                showMessage("Shhh... I'm sleeping!");
+                return;
+            }
+            
+            if (stats.hunger >= 100) {
+                showMessage("I'm too full for more!");
+                return;
+            }
+            
+            bunny.classList.remove('happy-anim', 'petting-anim', 'happy-face', 'hugging');
+            bunny.classList.add('eating-anim');
+            
+            // Show carrot
+            carrot.style.display = 'block';
+            
+            stats.hunger = Math.min(stats.hunger + 25, 100);
+            stats.energy = Math.min(stats.energy + 10, 100);
+            stats.happiness = Math.min(stats.happiness + 5, 100);
+            
+            updateStats();
+            showMessage("Yummy! More carrots please!");
+            
+            setTimeout(() => {
+                bunny.classList.remove('eating-anim');
+                setTimeout(() => {
+                    carrot.style.display = 'none';
+                }, 300);
+            }, 1200);
+        });
+        
+        document.getElementById('hug').addEventListener('click', () => {
+            if (isSleeping) {
+                showMessage("Shhh... I'm sleeping!");
+                return;
+            }
+            
+            bunny.classList.remove('happy-anim', 'eating-anim');
+            bunny.classList.add('hugging', 'happy-face');
+            
+            stats.happiness = Math.min(stats.happiness + 25, 100);
+            
+            updateStats();
+            showMessage("I love hugs! You're the best!");
+            
+            createHearts(5);
+            
+            setTimeout(() => {
+                bunny.classList.remove('hugging');
+                setTimeout(() => bunny.classList.remove('happy-face'), 500);
+            }, 1500);
+        });
+        
+        document.getElementById('sleep').addEventListener('click', () => {
+            if (isSleeping) {
+                // Wake up
+                bunny.classList.remove('sleeping');
+                isSleeping = false;
+                showMessage("Had a good nap! I'm ready to play!");
+                
+                // Restore some energy
+                stats.energy = Math.min(stats.energy + 30, 100);
+                updateStats();
+            } else {
+                // Go to sleep
+                bunny.classList.add('sleeping');
+                isSleeping = true;
+                showMessage("Zzz... Good night...");
+                
+                // Stop any current animations
+                bunny.classList.remove('happy-anim', 'eating-anim', 'happy-face', 'hugging');
+                carrot.style.display = 'none';
+            }
+        });
+        
+        document.getElementById('cheer').addEventListener('click', () => {
+            if (isSleeping) {
+                showMessage("Shhh... I'm sleeping!");
+                return;
+            }
+            
+            bunny.classList.remove('eating-anim', 'petting-anim', 'hugging');
+            bunny.classList.add('happy-face');
+            
+            // Select a random uplifting message
+            const randomMessage = cheerMessages[Math.floor(Math.random() * cheerMessages.length)];
+            
+            stats.happiness = Math.min(stats.happiness + 15, 100);
+            updateStats();
+            showMessage(randomMessage, 3000); // Show for 3 seconds (3000ms)
+            
+            createHearts(3);
+            
+            setTimeout(() => {
+                bunny.classList.remove('happy-face');
+            }, 1500);
+        });
+        
+        setInterval(() => {
+            if (!isSleeping) {
+                stats.hunger = Math.max(stats.hunger - 2, 0);
+                stats.happiness = Math.max(stats.happiness - 1, 0);
+                stats.energy = Math.max(stats.energy - 0.5, 0); // Reduce energy by 0.5
+                updateStats();
+                
+                if (stats.hunger < 20 && currentMood === 'hungry') {
+                    showMessage("I'm getting hungry...");
+                } else if (stats.energy < 20 && currentMood === 'tired') {
+                    showMessage("I need a nap...");
+                } else if (stats.happiness > 80 && currentMood === 'happy') {
+                    showMessage("Yayyyyy!");
+                }
+            } else {
+                // While sleeping, recover energy faster
+                stats.energy = Math.min(stats.energy + 3, 100);
+                updateStats();
+            }
+        }, 5000);
+        
+        setInterval(() => {
+            if (!isSleeping && !bunny.classList.contains('happy-anim') && 
+                !bunny.classList.contains('petting-anim') && 
+                !bunny.classList.contains('eating-anim') &&
+                !bunny.classList.contains('hugging')) {
+                
+                if (Math.random() > 0.7 && stats.energy > 30) {
+                    bunny.classList.add('happy-anim');
+                    setTimeout(() => bunny.classList.remove('happy-anim'), 800);
+                }
+                
+                const eyes = document.querySelectorAll('.eye');
+                eyes.forEach(eye => {
+                    eye.style.animation = 'none';
+                    void eye.offsetWidth;
+                    eye.style.animation = 'blink 3s infinite';
+                });
+            }
+        }, 3000);
+        
+        updateStats();
+        messageEl.style.transition = "opacity 0.5s";
+        messageEl.style.opacity = 0;
+    </script>
+</body>
+</html>
