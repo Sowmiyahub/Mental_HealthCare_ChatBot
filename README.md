@@ -1,6 +1,10 @@
-# Mental HealthCare ChatBot
+# LUMORA
 
-A conversational AI chatbot designed to provide mental health support using Natural Language Processing (NLP) techniques. This project aims to assist users by recognizing mental health concerns and offering empathetic responses.
+Lumora is an AI-driven mental health chatbot designed to
+support individuals experiencing emotional distress. It analyzes user input using NLP and offers relevant content like
+mindfulness tips, motivational quotes, and relaxation activities
+in real-time, fostering emotional well-being through safe and
+private conversations.
 
 ## Project Structure
 
@@ -62,19 +66,37 @@ Ensure you have the following installed:
 - Other Library like Flask-login, Flask-bcrypt
   
 ## Screenshots
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/63239c57-86fd-4e19-a909-cfd86e101fce)
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/chatbot.png)
 
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/d15f235a-ae37-4c4b-9245-640528e147d3)
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/Home.png)
 
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/b9a479bb-a148-4fc2-8cda-0d8fd192d023)
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/Register.png)
 
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/baf0f1b5-d4b2-479b-bb52-07cd055e00f9)
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/Login.png)
 
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/06cb6f7f-a20c-4980-aa9e-b006d9ac7190)
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/Interface.png)
 
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/f0c138af-2b8f-4d35-b2a7-8c3b70102bea)
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/Breathing_Flower.png)
 
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/556d6e84-f8f0-4480-ab06-d4523895486d)
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/Depression_Tests.png)
+
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/Anxiety_Tests.png)
+
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/Mindfulness_Module.png)
+
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/Topics.png)
+
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/Journal.png)
+
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/Virtual_Plant.png)
+
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/Virtual_Bunny.png)
+
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/Game.png)
+
+![image](Python-Mental-Health-Chatbot-main/ChatbotWebsite/static/Images/SOS.png)
+
+
 
 ## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
