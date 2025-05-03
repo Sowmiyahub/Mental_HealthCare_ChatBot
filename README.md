@@ -36,9 +36,9 @@ Ensure you have the following installed:
 3. **Run the chatbot:**
     - python chatbot.py
 ## Features
-Intent Recognition: Classifies user inputs into predefined intents.
-Contextual Responses: Provides responses based on the identified intent.
-Extensible Design: Easily add new intents and responses by modifying the intents JSON file.
+- Intent Recognition: Classifies user inputs into predefined intents.
+- Contextual Responses: Provides responses based on the identified intent.
+- Extensible Design: Easily add new intents and responses by modifying the intents JSON file.
 ## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
 ## Contact
