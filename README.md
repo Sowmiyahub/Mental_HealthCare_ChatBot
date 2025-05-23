@@ -100,5 +100,3 @@ Ensure you have the following installed:
 
 ## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
-## Contact
-For any inquiries or feedback, please contact sowmiyadasa2004@example.com.
